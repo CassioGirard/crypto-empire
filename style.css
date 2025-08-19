@@ -43,6 +43,7 @@ body {
     gap: 10px;
     min-height: 120px;
     max-height: 140px;
+    overflow: hidden; /* Evitar que o conteúdo vaze */
 }
 
 .game-header h1 {
@@ -59,6 +60,8 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 8px;
     font-size: 0.75rem;
+    max-height: 60px; /* Limitar altura máxima */
+    overflow: hidden; /* Evitar vazamento */
 }
 
 .stat {
@@ -69,6 +72,8 @@ body {
     border: 1px solid rgba(102, 126, 234, 0.2);
     min-width: 70px;
     max-width: 100px;
+    max-height: 28px; /* Limitar altura de cada stat */
+    overflow: hidden; /* Evitar vazamento */
 }
 
 .stat .label {
@@ -90,7 +95,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 140px 10px 20px;
+    padding: 160px 10px 20px; /* Aumentei o padding-top para 160px */
+    position: relative;
+    z-index: 1; /* Garantir que fique abaixo do header */
 }
 
 /* Seções principais */
@@ -638,6 +645,21 @@ h2 {
     .risk-controls {
         margin-top: 0;
         margin-left: auto;
+    }
+}
+
+/* Responsivo para telas maiores */
+@media (min-width: 391px) {
+    .game-main {
+        padding: 180px 20px 30px; /* Aumentar padding em telas maiores */
+    }
+    
+    .game-header {
+        max-height: 150px; /* Permitir um pouco mais de altura em telas maiores */
+    }
+    
+    .stats {
+        max-height: 70px; /* Permitir um pouco mais de altura em telas maiores */
     }
 }
 
