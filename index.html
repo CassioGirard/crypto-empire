@@ -135,19 +135,26 @@
             </div>
 
             <div class="settings-section">
-                <h2>⚙️ Configurações</h2>
+                <h3>⚙️ Configurações</h3>
                 <div class="settings-controls">
-                    <button id="toggle-sound" class="btn btn-small">🔊 Som</button>
-                    <button id="toggle-theme" class="btn btn-small">🌙 Tema</button>
-                    <button id="reset-game" class="btn btn-small btn-danger">🔄 Reset</button>
+                    <button id="buy-insurance" class="btn btn-secondary">🛡️ Comprar Seguro</button>
+                    <button id="toggle-sound" class="btn btn-secondary">🔊 Som</button>
+                    <button id="toggle-theme" class="btn btn-secondary">🌙 Tema</button>
+                    <button id="add-favorites" class="btn btn-secondary">⭐ Favoritos</button>
+                    <button id="save-game" class="btn btn-success">💾 Salvar Jogo</button>
+                    <button id="load-game" class="btn btn-primary">📂 Carregar Jogo</button>
+                    <button id="reset-game" class="btn btn-danger">🗑️ Reset</button>
                 </div>
                 <div class="game-info">
-                    <p><strong>Sequência de Lucros:</strong> <span id="streak-display">0</span> dias</p>
-                    <p><strong>Sequência Máxima:</strong> <span id="max-streak-display">0</span> dias</p>
+                    <p><strong>Streak:</strong> <span id="streak-display">0</span></p>
+                    <p><strong>Max Streak:</strong> <span id="max-streak-display">0</span></p>
                     <p><strong>Bônus Diário:</strong> <span id="daily-bonus-display">$0</span></p>
                     <p><strong>Seguro:</strong> <span id="insurance-status">Inativo</span></p>
                     <p><strong>Velocidade do Tempo:</strong> <span id="time-speed-display">1x</span></p>
                     <p><strong>Próximo Dia em:</strong> <span id="next-day-countdown">30s</span></p>
+                    <div id="save-info" class="save-info">
+                        <p><strong>Status do Save:</strong> <span id="save-status">Verificando...</span></p>
+                    </div>
                 </div>
             </div>
         </main>

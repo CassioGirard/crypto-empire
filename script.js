@@ -275,6 +275,24 @@ class CryptoGame {
                 this.toggleFavorites();
             });
         }
+
+        const saveGameBtn = document.getElementById('save-game');
+        if (saveGameBtn) {
+            saveGameBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.saveGame();
+            });
+        }
+
+        const loadGameBtn = document.getElementById('load-game');
+        if (loadGameBtn) {
+            loadGameBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.loadGame();
+            });
+        }
     }
 
     toggleAutoAdvance() {
@@ -463,6 +481,7 @@ class CryptoGame {
         this.updateMissionsDisplay();
         this.updateLeaderboardDisplay();
         this.updateGameInfo();
+        this.updateSaveInfo();
         
         this.saveGameState();
     }
@@ -771,16 +790,7 @@ class CryptoGame {
         if (this.streak > 0) {
             this.dailyBonus = this.streak * 10;
             this.balance += this.dailyBonus;
-        }
-    }
-
-    checkInsurance() {
-        if (this.insurance && this.insuranceDays > 0) {
-            this.insuranceDays--;
-            if (this.insuranceDays === 0) {
-                this.insurance = false;
-                this.showNotification('Seguro expirou', 'info');
-            }
+            console.log(`💰 Bônus diário aplicado: $${this.dailyBonus}`);
         }
     }
 
@@ -799,65 +809,70 @@ class CryptoGame {
         }
     }
 
-    buyInsurance() {
-        if (this.insurance) {
-            this.showNotification('Você já possui seguro ativo', 'info');
-            return;
-        }
-        
-        const cost = 1000;
-        if (this.balance >= cost) {
-            this.balance -= cost;
-            this.insurance = true;
-            this.insuranceCost = cost;
-            this.insuranceDays = 30;
-            this.showNotification('Seguro ativado por 30 dias', 'success');
-            this.updateUI();
-        } else {
-            this.showNotification('Saldo insuficiente para comprar seguro', 'error');
+    checkInsurance() {
+        if (this.insurance && this.insuranceDays > 0) {
+            this.insuranceDays--;
+            if (this.insuranceDays === 0) {
+                this.insurance = false;
+                this.showNotification('Seguro expirou', 'info');
+            }
         }
     }
 
-    toggleSound() {
-        this.soundEnabled = !this.soundEnabled;
-        const soundBtn = document.getElementById('toggle-sound');
-        if (soundBtn) {
-            soundBtn.textContent = this.soundEnabled ? '🔊 Som' : '🔇 Mudo';
+    checkSpecialEvents() {
+        // Verificar se deve disparar um evento especial
+        if (Math.random() < 0.1 && this.day > 10) {
+            this.triggerSpecialEvent();
         }
-        this.showNotification(this.soundEnabled ? 'Som ativado' : 'Som desativado', 'info');
-        this.saveGameState();
     }
 
-    toggleTheme() {
-        this.theme = this.theme === 'light' ? 'dark' : 'light';
-        document.body.classList.toggle('dark', this.theme === 'dark');
-        
-        const themeBtn = document.getElementById('toggle-theme');
-        if (themeBtn) {
-            themeBtn.textContent = this.theme === 'light' ? '🌙 Tema' : '☀️ Tema';
-        }
-        
-        this.showNotification(`Tema alterado para ${this.theme === 'light' ? 'claro' : 'escuro'}`, 'info');
-        this.saveGameState();
+    startSpecialEvents() {
+        setInterval(() => {
+            if (Math.random() < 0.1 && this.day > 10) {
+                this.triggerSpecialEvent();
+            }
+        }, 60000);
     }
 
-    toggleFavorites() {
-        const symbol = document.getElementById('crypto-select').value;
-        if (!symbol) {
-            this.showNotification('Selecione uma criptomoeda primeiro', 'info');
-            return;
+    triggerSpecialEvent() {
+        const events = [
+            { name: 'Pump and Dump', effect: 'pump', description: 'Preços sobem rapidamente!' },
+            { name: 'Market Crash', effect: 'crash', description: 'Mercado em queda livre!' },
+            { name: 'FOMO', effect: 'fomo', description: 'Medo de perder oportunidade!' }
+        ];
+        
+        const event = events[Math.floor(Math.random() * events.length)];
+        this.applyEventEffect(event);
+        
+        this.specialEvents.unshift({
+            name: event.name,
+            description: event.description,
+            day: this.day
+        });
+        
+        if (this.specialEvents.length > 5) {
+            this.specialEvents.pop();
         }
         
-        const index = this.favoriteCryptos.indexOf(symbol);
-        if (index > -1) {
-            this.favoriteCryptos.splice(index, 1);
-            this.showNotification(`${symbol} removido dos favoritos`, 'info');
-        } else {
-            this.favoriteCryptos.push(symbol);
-            this.showNotification(`${symbol} adicionado aos favoritos`, 'success');
-        }
-        
-        this.saveGameState();
+        this.showNotification(`⚡ ${event.name}: ${event.description}`, 'info');
+    }
+
+    applyEventEffect(event) {
+        this.cryptos.forEach(crypto => {
+            let multiplier = 1;
+            switch (event.effect) {
+                case 'pump':
+                    multiplier = 1 + (Math.random() * 0.3);
+                    break;
+                case 'crash':
+                    multiplier = 1 - (Math.random() * 0.3);
+                    break;
+                case 'fomo':
+                    multiplier = 1 + (Math.random() * 0.2);
+                    break;
+            }
+            crypto.price *= multiplier;
+        });
     }
 
     updateMarketSentiment() {
@@ -923,55 +938,6 @@ class CryptoGame {
                 <div class="news-content">${news.content}</div>
             `;
             newsContainer.appendChild(newsItem);
-        });
-    }
-
-    startSpecialEvents() {
-        setInterval(() => {
-            if (Math.random() < 0.1 && this.day > 10) {
-                this.triggerSpecialEvent();
-            }
-        }, 60000);
-    }
-
-    triggerSpecialEvent() {
-        const events = [
-            { name: 'Pump and Dump', effect: 'pump', description: 'Preços sobem rapidamente!' },
-            { name: 'Market Crash', effect: 'crash', description: 'Mercado em queda livre!' },
-            { name: 'FOMO', effect: 'fomo', description: 'Medo de perder oportunidade!' }
-        ];
-        
-        const event = events[Math.floor(Math.random() * events.length)];
-        this.applyEventEffect(event);
-        
-        this.specialEvents.unshift({
-            name: event.name,
-            description: event.description,
-            day: this.day
-        });
-        
-        if (this.specialEvents.length > 5) {
-            this.specialEvents.pop();
-        }
-        
-        this.showNotification(`⚡ ${event.name}: ${event.description}`, 'info');
-    }
-
-    applyEventEffect(event) {
-        this.cryptos.forEach(crypto => {
-            let multiplier = 1;
-            switch (event.effect) {
-                case 'pump':
-                    multiplier = 1 + (Math.random() * 0.3);
-                    break;
-                case 'crash':
-                    multiplier = 1 - (Math.random() * 0.3);
-                    break;
-                case 'fomo':
-                    multiplier = 1 + (Math.random() * 0.2);
-                    break;
-            }
-            crypto.price *= multiplier;
         });
     }
 
@@ -1082,10 +1048,26 @@ class CryptoGame {
     }
 
     updateGameInfo() {
-        document.getElementById('streak-display').textContent = this.streak;
-        document.getElementById('max-streak-display').textContent = this.maxStreak;
-        document.getElementById('daily-bonus-display').textContent = `$${this.dailyBonus}`;
-        document.getElementById('insurance-status').textContent = this.insurance ? `Ativo (${this.insuranceDays} dias)` : 'Inativo';
+        const streakDisplay = document.getElementById('streak-display');
+        const maxStreakDisplay = document.getElementById('max-streak-display');
+        const dailyBonusDisplay = document.getElementById('daily-bonus-display');
+        const insuranceStatus = document.getElementById('insurance-status');
+        const timeSpeedDisplay = document.getElementById('time-speed-display');
+        const nextDayCountdown = document.getElementById('next-day-countdown');
+        
+        if (streakDisplay) streakDisplay.textContent = this.streak;
+        if (maxStreakDisplay) maxStreakDisplay.textContent = this.maxStreak;
+        if (dailyBonusDisplay) dailyBonusDisplay.textContent = `$${this.dailyBonus}`;
+        if (insuranceStatus) insuranceStatus.textContent = this.insurance ? `Ativo (${this.insuranceDays} dias)` : 'Inativo';
+        if (timeSpeedDisplay) timeSpeedDisplay.textContent = `${this.timeSpeed}x`;
+        if (nextDayCountdown) this.updateCountdown();
+    }
+
+    updateSaveInfo() {
+        const saveStatus = document.getElementById('save-status');
+        if (saveStatus) {
+            saveStatus.textContent = this.showSaveInfo();
+        }
     }
 
     showNotification(message, type = 'info') {
@@ -1105,6 +1087,152 @@ class CryptoGame {
         }, 3000);
     }
 
+    saveGame() {
+        const gameState = {
+            balance: this.balance,
+            portfolio: this.portfolio,
+            day: this.day,
+            level: this.level,
+            experience: this.experience,
+            experienceToNextLevel: this.experienceToNextLevel,
+            totalProfit: this.totalProfit,
+            totalTrades: this.totalTrades,
+            successfulTrades: this.successfulTrades,
+            achievements: this.achievements,
+            streak: this.streak,
+            maxStreak: this.maxStreak,
+            dailyBonus: this.dailyBonus,
+            insurance: this.insurance,
+            insuranceDays: this.insuranceDays,
+            favoriteCryptos: this.favoriteCryptos,
+            soundEnabled: this.soundEnabled,
+            theme: this.theme,
+            timeSpeed: this.timeSpeed,
+            autoAdvance: this.autoAdvance,
+            riskLevel: this.riskLevel,
+            marketSentiment: this.marketSentiment,
+            cryptos: this.cryptos,
+            missions: this.missions,
+            leaderboard: this.leaderboard,
+            specialEvents: this.specialEvents,
+            news: this.news,
+            portfolioHistory: this.portfolioHistory,
+            timestamp: Date.now()
+        };
+        
+        try {
+            localStorage.setItem('cryptoEmpireSave', JSON.stringify(gameState));
+            this.showNotification('✅ Jogo salvo com sucesso!', 'success');
+            console.log('💾 Jogo salvo:', gameState);
+        } catch (error) {
+            console.error('❌ Erro ao salvar:', error);
+            this.showNotification('❌ Erro ao salvar o jogo', 'error');
+        }
+    }
+
+    loadGame() {
+        try {
+            const savedGame = localStorage.getItem('cryptoEmpireSave');
+            if (!savedGame) {
+                this.showNotification('❌ Nenhum save encontrado', 'error');
+                return;
+            }
+            
+            const gameState = JSON.parse(savedGame);
+            
+            // Restaurar estado do jogo
+            this.balance = gameState.balance || 10000;
+            this.portfolio = gameState.portfolio || {};
+            this.day = gameState.day || 1;
+            this.level = gameState.level || 1;
+            this.experience = gameState.experience || 0;
+            this.experienceToNextLevel = gameState.experienceToNextLevel || 100;
+            this.totalProfit = gameState.totalProfit || 0;
+            this.totalTrades = gameState.totalTrades || 0;
+            this.successfulTrades = gameState.successfulTrades || 0;
+            this.achievements = gameState.achievements || [];
+            this.streak = gameState.streak || 0;
+            this.maxStreak = gameState.maxStreak || 0;
+            this.dailyBonus = gameState.dailyBonus || 0;
+            this.insurance = gameState.insurance || false;
+            this.insuranceDays = gameState.insuranceDays || 0;
+            this.favoriteCryptos = gameState.favoriteCryptos || [];
+            this.soundEnabled = gameState.soundEnabled !== undefined ? gameState.soundEnabled : true;
+            this.theme = gameState.theme || 'light';
+            this.timeSpeed = gameState.timeSpeed || 1;
+            this.autoAdvance = gameState.autoAdvance !== undefined ? gameState.autoAdvance : true;
+            this.riskLevel = gameState.riskLevel || 1;
+            this.marketSentiment = gameState.marketSentiment || 'neutral';
+            
+            // Restaurar criptomoedas se existirem
+            if (gameState.cryptos) {
+                this.cryptos = gameState.cryptos;
+            }
+            
+            // Restaurar outros dados
+            this.missions = gameState.missions || [];
+            this.leaderboard = gameState.leaderboard || [];
+            this.specialEvents = gameState.specialEvents || [];
+            this.news = gameState.news || [];
+            this.portfolioHistory = gameState.portfolioHistory || [];
+            
+            // Aplicar tema
+            if (this.theme === 'dark') {
+                document.body.classList.add('dark');
+            } else {
+                document.body.classList.remove('dark');
+            }
+            
+            // Atualizar UI
+            this.updateUI();
+            
+            // Mostrar informações do save
+            const saveDate = new Date(gameState.timestamp);
+            const timeAgo = this.getTimeAgo(saveDate);
+            
+            this.showNotification(`✅ Jogo carregado! Save de ${timeAgo}`, 'success');
+            console.log('📂 Jogo carregado:', gameState);
+            
+        } catch (error) {
+            console.error('❌ Erro ao carregar:', error);
+            this.showNotification('❌ Erro ao carregar o save', 'error');
+        }
+    }
+
+    getTimeAgo(date) {
+        const now = new Date();
+        const diffMs = now - date;
+        const diffMins = Math.floor(diffMs / 60000);
+        const diffHours = Math.floor(diffMs / 3600000);
+        const diffDays = Math.floor(diffMs / 86400000);
+        
+        if (diffMins < 1) return 'agora mesmo';
+        if (diffMins < 60) return `${diffMins} min atrás`;
+        if (diffHours < 24) return `${diffHours}h atrás`;
+        if (diffDays < 7) return `${diffDays} dias atrás`;
+        return date.toLocaleDateString('pt-BR');
+    }
+
+    hasSaveGame() {
+        return localStorage.getItem('cryptoEmpireSave') !== null;
+    }
+
+    showSaveInfo() {
+        const saveGame = localStorage.getItem('cryptoEmpireSave');
+        if (saveGame) {
+            try {
+                const gameState = JSON.parse(saveGame);
+                const saveDate = new Date(gameState.timestamp);
+                const timeAgo = this.getTimeAgo(saveDate);
+                
+                return `📂 Último save: ${timeAgo} (Dia ${gameState.day})`;
+            } catch (error) {
+                return '📂 Save disponível (corrompido)';
+            }
+        }
+        return '📂 Nenhum save encontrado';
+    }
+
     saveGameState() {
         const gameState = {
             balance: this.balance,
@@ -1112,16 +1240,30 @@ class CryptoGame {
             day: this.day,
             level: this.level,
             experience: this.experience,
+            experienceToNextLevel: this.experienceToNextLevel,
+            totalProfit: this.totalProfit,
+            totalTrades: this.totalTrades,
+            successfulTrades: this.successfulTrades,
             achievements: this.achievements,
             streak: this.streak,
             maxStreak: this.maxStreak,
+            dailyBonus: this.dailyBonus,
             insurance: this.insurance,
             insuranceDays: this.insuranceDays,
             favoriteCryptos: this.favoriteCryptos,
             soundEnabled: this.soundEnabled,
             theme: this.theme,
             timeSpeed: this.timeSpeed,
-            autoAdvance: this.autoAdvance
+            autoAdvance: this.autoAdvance,
+            riskLevel: this.riskLevel,
+            marketSentiment: this.marketSentiment,
+            cryptos: this.cryptos,
+            missions: this.missions,
+            leaderboard: this.leaderboard,
+            specialEvents: this.specialEvents,
+            news: this.news,
+            portfolioHistory: this.portfolioHistory,
+            timestamp: Date.now()
         };
         
         localStorage.setItem('cryptoEmpireState', JSON.stringify(gameState));
