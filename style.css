@@ -31,7 +31,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     width: 374px;
-    background: rgba(255, 255, 255, 0.95);
+    background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 0 0 20px 20px;
@@ -41,56 +41,58 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    min-height: 140px; /* Aumentei de 120px para 140px */
-    max-height: 160px; /* Aumentei de 140px para 160px */
-    overflow: visible; /* Mudei de hidden para visible */
+    min-height: 140px;
+    max-height: 160px;
+    overflow: visible;
 }
 
 .game-header h1 {
     font-size: 1.5rem;
     font-weight: 700;
     text-align: center;
-    color: #667eea;
+    color: #1e3a8a;
     margin: 0;
 }
 
 /* Estatísticas */
 .stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: row;
     gap: 8px;
     font-size: 0.75rem;
-    max-height: 80px; /* Aumentei de 60px para 80px */
-    overflow: visible; /* Mudei de hidden para visible */
+    max-height: 80px;
+    overflow: visible;
+    justify-content: center;
 }
 
 .stat {
-    background: rgba(102, 126, 234, 0.1);
-    padding: 8px 10px; /* Aumentei padding de 6px 8px para 8px 10px */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 8px 10px;
     border-radius: 8px;
     text-align: center;
-    border: 1px solid rgba(102, 126, 234, 0.2);
+    border: none;
     min-width: 70px;
     max-width: 100px;
-    min-height: 35px; /* Adicionei altura mínima */
-    max-height: 40px; /* Aumentei de 28px para 40px */
-    overflow: visible; /* Mudei de hidden para visible */
+    min-height: 35px;
+    max-height: 40px;
+    overflow: visible;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .stat .label {
     display: block;
     font-weight: 600;
-    color: #667eea;
+    color: white;
     font-size: 0.65rem;
 }
 
 .stat .value {
     display: block;
     font-weight: 700;
-    color: #333;
+    color: white;
     font-size: 0.75rem;
 }
 
