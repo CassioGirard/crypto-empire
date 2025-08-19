@@ -45,7 +45,7 @@ class CryptoGame {
             { name: 'Cardano', symbol: 'ADA', price: 1.20, volatility: 0.25, marketCap: 42000000000, category: 'smart-contracts', trend: 'down', lastUpdate: 0, lastChangePercent: 0 },
             { name: 'Solana', symbol: 'SOL', price: 95, volatility: 0.22, marketCap: 41000000000, category: 'smart-contracts', trend: 'up', lastUpdate: 0, lastChangePercent: 0 },
             { name: 'Polkadot', symbol: 'DOT', price: 18, volatility: 0.20, marketCap: 18000000000, category: 'interoperability', trend: 'neutral', lastUpdate: 0, lastChangePercent: 0 },
-            { name: 'Chainlink', symbol: 'LINK', price: 25, volatility: 0.23, marketCap: 14000000000, category: 'oracles', trend: 'down', lastUpdate: 0, lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Chainlink', symbol: 'LINK', price: 25, volatility: 0.23, marketCap: 14000000000, category: 'oracles', trend: 'down', lastUpdate: 0, lastChangePercent: 0 },
             { name: 'Uniswap', symbol: 'UNI', price: 12, volatility: 0.21, marketCap: 7200000000, category: 'defi', trend: 'up', lastUpdate: 0, lastChangePercent: 0 },
             { name: 'Aave', symbol: 'AAVE', price: 280, volatility: 0.19, marketCap: 4000000000, category: 'defi', trend: 'neutral', lastUpdate: 0, lastChangePercent: 0 },
             { name: 'Polygon', symbol: 'MATIC', price: 0.85, volatility: 0.26, marketCap: 8000000000, category: 'scaling', trend: 'up', lastUpdate: 0, lastChangePercent: 0 },
@@ -503,6 +503,9 @@ class CryptoGame {
             const change = crypto.lastChangePercent || 0;
             const changeClass = change >= 0 ? 'positive' : 'negative';
             const changeSymbol = change >= 0 ? '+' : '';
+            
+            // Debug: verificar se a variação está sendo atualizada
+            console.log(`${crypto.symbol}: preço=${crypto.price}, variação=${crypto.lastChangePercent}`);
             
             cryptoItem.innerHTML = `
                 <div class="crypto-info">
