@@ -1,228 +1,272 @@
-# Crypto Empire - Simulador de Mercado
+# 🚀 Crypto Real Simulator
 
-Um jogo de simulação de mercado de criptomoedas desenvolvido em HTML, CSS e JavaScript com funcionalidades avançadas e layout otimizado para mobile.
+Um simulador comunitário de mercado de criptomoeda fictícia **$REAL** em tempo real, onde cada jogador pode comprar e vender moedas, afetando o preço global do mercado.
 
-## 🎯 Características Principais
+## ✨ Características
 
-- **Simulação Realista**: Mercado de criptomoedas com preços dinâmicos e volatilidade
-- **Sistema de Portfolio**: Compre e venda criptomoedas com cálculo de lucros
-- **Sistema de Conquistas**: 10 conquistas desbloqueáveis com recompensas
-- **Missões Diárias**: 4 missões com progresso e recompensas
-- **Eventos Especiais**: Eventos que afetam o mercado dinamicamente
-- **Notícias do Mercado**: Sistema de notícias que influencia preços
-- **Sistema de Ranking**: Leaderboard global com posicionamento
-- **Layout Responsivo**: Otimizado para mobile (390x844) e desktop
-- **Persistência**: Auto-save e carregamento de progresso
+- **Preço dinâmico** baseado em oferta e demanda em tempo real
+- **Interface moderna** com React + TailwindCSS + Framer Motion
+- **Comunicação em tempo real** via Socket.io
+- **Sistema de ranking** global dos melhores traders
+- **Eventos de mercado** aleatórios que afetam todos os jogadores
+- **Histórico completo** de trades e preços
+- **Responsivo** para desktop e mobile
+- **Persistência** de dados via MongoDB
 
-## 🆕 Novas Funcionalidades Implementadas
+## 🏗️ Arquitetura
 
-### 🎯 Sistema de Missões
-- **Missões Diárias**: Objetivos específicos para cada dia
-- **Progresso Visual**: Barras de progresso para acompanhar objetivos
-- **Recompensas**: Dinheiro e XP por missões completadas
-- **Tipos**: Lucro diário, compra na baixa, venda na alta, diversificação
+### Frontend
+- **React 18** com hooks e context API
+- **TailwindCSS** para estilização
+- **Framer Motion** para animações
+- **Recharts** para gráficos de preço
+- **Socket.io Client** para comunicação em tempo real
 
-### 🏆 Sistema de Conquistas Expandido
-- **10 Conquistas**: Desbloqueie todas as conquistas disponíveis
-- **Novas Conquistas**:
-  - 🎯 **Mestre da Sequência**: 10 dias consecutivos de lucro
-  - 🎲 **Tomador de Risco**: Use nível de risco máximo por 5 dias
-  - ✅ **Completador de Missões**: Complete 20 missões
-  - 📈 **Seguidor de Tendências**: Compre 3 criptos em alta
+### Backend
+- **Node.js** com Express
+- **Socket.io** para comunicação em tempo real
+- **MongoDB** com Mongoose para persistência
+- **API REST** para operações CRUD
 
-### 📊 Sistema de Ranking (Leaderboard)
-- **Ranking Global**: Compare seu desempenho com outros jogadores
-- **Posicionamento**: Veja sua posição atual no ranking
-- **Estatísticas**: Saldo, nível e lucro total dos jogadores
-- **Medalhas**: 🥇🥈🥉 para os 3 primeiros lugares
+### Banco de Dados
+- **MongoDB** para armazenar jogadores e dados de mercado
+- **Schemas** para Player, Market e histórico de trades
 
-### 🛡️ Sistema de Seguro
-- **Proteção**: Ative seguro por $1000 por 7 dias
-- **Benefícios**: Proteção contra perdas durante o período
-- **Status**: Acompanhe dias restantes do seguro
-- **Estratégia**: Use em momentos de alta volatilidade
+## 🚀 Instalação
 
-### ⭐ Sistema de Favoritos
-- **Criptos Favoritas**: Marque suas criptomoedas preferidas
-- **Identificação Visual**: Estrelas para identificar favoritos
-- **Gestão**: Adicione/remova favoritos facilmente
+### Pré-requisitos
+- Node.js 16+ 
+- MongoDB 5+
+- npm ou yarn
 
-### 🎨 Sistema de Temas
-- **Tema Claro**: Interface padrão com cores vibrantes
-- **Tema Escuro**: Modo noturno para melhor experiência
-- **Alternância**: Mude entre temas com um clique
-- **Persistência**: Tema salvo automaticamente
+### 1. Clone o repositório
+```bash
+git clone <seu-repositorio>
+cd crypto-empire
+```
 
-### 🔊 Sistema de Som
-- **Controle de Áudio**: Ative/desative sons do jogo
-- **Notificações Sonoras**: Feedback auditivo para ações
-- **Preferências**: Configuração salva automaticamente
+### 2. Instale as dependências
+```bash
+# Instalar dependências do projeto principal
+npm install
 
-### 📈 Sistema de Sequências (Streaks)
-- **Sequência de Lucros**: Dias consecutivos com lucro
-- **Bônus Diários**: Recompensas baseadas na sequência
-- **Recordes**: Acompanhe sua sequência máxima
-- **Conquistas**: Desbloqueie conquistas por sequências
+# Instalar dependências do servidor
+cd server
+npm install
 
-### 💰 Sistema de Taxas
-- **Taxa de Trading**: 0.1% por operação (compra/venda)
-- **Realismo**: Simula custos reais de trading
-- **Estratégia**: Considere taxas em suas operações
+# Instalar dependências do cliente
+cd ../client
+npm install
 
-### 📊 Histórico do Portfolio
-- **Rastreamento**: Histórico de 100 dias de operações
-- **Análise**: Visualize evolução do seu portfolio
-- **Métricas**: Saldo, valor do portfolio e valor total
-- **Persistência**: Dados salvos automaticamente
+# Voltar para a raiz
+cd ..
+```
 
-### 🚀 Criptomoedas Expandidas
-- **15 Criptomoedas**: Lista expandida com mais opções
-- **Novas Categorias**: Meme coins, pagamentos, interoperabilidade
-- **Tendências**: Indicadores visuais de tendência (📈📉➡️)
-- **Volatilidade**: Diferentes níveis de risco por cripto
+### 3. Configure o MongoDB
+Certifique-se de que o MongoDB está rodando localmente ou configure a variável de ambiente:
+
+```bash
+# Copie o arquivo de exemplo
+cp server/env.example server/.env
+
+# Edite o arquivo .env com sua configuração
+MONGODB_URI=mongodb://localhost:27017/crypto-real
+PORT=5000
+NODE_ENV=development
+```
+
+### 4. Inicie o projeto
+```bash
+# Desenvolvimento (inicia servidor + cliente simultaneamente)
+npm run dev
+
+# Ou inicie separadamente:
+npm run server    # Inicia o backend na porta 5000
+npm run client    # Inicia o frontend na porta 3000
+```
 
 ## 🎮 Como Jogar
 
-### **Controles Básicos**
-1. **Próximo Dia**: Avance a simulação manualmente
-2. **Pausar**: Pare a simulação automática
-3. **Nível de Risco**: Ajuste de 1-5 para afetar volatilidade
-4. **Comprar/Vender**: Execute operações de trading
+### 1. **Entrar no Mercado**
+- Digite seu nome (sem senha)
+- Clique em "Entrar no Mercado"
+- Você receberá 10.000 BRL fictícios para começar
 
-### **Sistema de Missões**
-- Complete missões diárias para ganhar recompensas
-- Acompanhe progresso através das barras visuais
-- Missões incluem objetivos de lucro, diversificação e timing
+### 2. **Fazer Trades**
+- **Comprar $REAL**: Use seu saldo BRL para comprar moedas $REAL
+- **Vender $REAL**: Venda suas moedas $REAL por BRL
+- Cada trade afeta o preço global da moeda
 
-### **Estratégias Avançadas**
-- Use o sistema de seguro em momentos de alta volatilidade
-- Mantenha sequências de lucro para bônus diários
-- Diversifique seu portfolio para conquistas especiais
-- Acompanhe tendências de mercado para timing ideal
+### 3. **Mecânica de Preço**
+- **Oferta e Demanda**: Compras aumentam o preço, vendas diminuem
+- **Fator de Elasticidade**: 0.001 (ajustável)
+- **Preço Mínimo**: 0.01 BRL
+- **Eventos Aleatórios**: Notícias que afetam o preço
 
-## 🎨 Design System
+### 4. **Objetivo**
+- Acumular o maior patrimônio total (BRL + $REAL convertido)
+- Competir no ranking global
+- Sobreviver a crashes e aproveitar bull runs
 
-### **Cores e Temas**
-- **Primária**: Gradiente azul-roxo (#667eea → #764ba2)
-- **Secundária**: Gradiente rosa-vermelho (#f093fb → #f5576c)
-- **Sucesso**: Gradiente azul (#4facfe → #00f2fe)
-- **Perigo**: Gradiente rosa-amarelo (#fa709a → #fee140)
-- **Tema Escuro**: Modo noturno com cores adaptadas
+## 📊 Funcionalidades
 
-### **Tipografia e Espaçamento**
-- **Fonte**: Segoe UI com fallbacks otimizados
-- **Hierarquia**: Tamanhos adaptados para mobile e desktop
-- **Espaçamento**: Sistema consistente de gaps e padding
-- **Legibilidade**: Contraste otimizado para todas as resoluções
+### Mercado Global
+- Preço atual em tempo real
+- Gráfico histórico de preços
+- Volume de transações
+- Estatísticas do mercado
 
-## 📱 Responsividade
+### Carteira do Jogador
+- Saldo em BRL e $REAL
+- Patrimônio total
+- Histórico de trades
+- Interface de compra/venda
 
-### **Breakpoints**
-- **Mobile**: ≤390px (otimizado para iPhone 12 Pro)
-- **Tablet**: 391px - 1199px
-- **Desktop**: ≥1200px
+### Ranking Global
+- Top 20 traders
+- Estatísticas por jogador
+- Destaque para top 3
+- Atualização em tempo real
 
-### **Adaptações Mobile**
-- Layout vertical empilhado para melhor navegação
-- Header compacto com todas as estatísticas visíveis
-- Botões otimizados para touch (44px mínimo)
-- Scroll suave com `-webkit-overflow-scrolling: touch`
+### Sistema de Notícias
+- Eventos automáticos de mercado
+- Notícias importantes destacadas
+- Histórico de eventos
+- Impacto no preço
 
-### **Adaptações Desktop**
-- Layout em grid 2x4 para melhor aproveitamento
-- Header horizontal com estatísticas lado a lado
-- Elementos organizados em colunas paralelas
-- Hover effects e interações avançadas
+## 🔧 Configuração Avançada
 
-## 🔧 Tecnologias e Arquitetura
-
-### **Frontend**
-- **HTML5**: Estrutura semântica e acessível
-- **CSS3**: Flexbox, Grid, Media Queries, Animations
-- **JavaScript ES6+**: Classes, Arrow Functions, Template Literals
-
-### **Funcionalidades**
-- **Local Storage**: Persistência de dados do jogo
-- **Auto-save**: Salvamento automático a cada 30 segundos
-- **Event System**: Sistema de eventos para interações
-- **State Management**: Gerenciamento de estado centralizado
-
-### **Performance**
-- **Lazy Loading**: Carregamento sob demanda de elementos
-- **Debouncing**: Otimização de eventos de scroll e resize
-- **Memory Management**: Limpeza automática de dados antigos
-- **Smooth Animations**: Transições suaves com CSS e JavaScript
-
-## 🚀 Funcionalidades Avançadas
-
-### **Sistema de Eventos**
-- **Eventos Aleatórios**: Halving, forks, regulamentações
-- **Efeitos no Mercado**: Impacto nos preços das criptos
-- **Notificações**: Alertas para eventos importantes
-- **Histórico**: Registro dos últimos 5 eventos
-
-### **Análise de Mercado**
-- **Sentimento**: Bullish, Bearish, Neutral
-- **Tendências**: Indicadores visuais de direção
-- **Volatilidade**: Diferentes níveis por criptomoeda
-- **Market Cap**: Simulação realista de capitalização
-
-### **Sistema de Progresso**
-- **Níveis**: Sistema de XP com recompensas
-- **Bônus**: Recompensas por level up
-- **Conquistas**: Objetivos de longo prazo
-- **Missões**: Objetivos diários e semanais
-
-## 📁 Estrutura do Projeto
-
-```
-game/
-├── index.html          # Estrutura principal com novas seções
-├── style.css           # Estilos responsivos e temas
-├── script.js           # Lógica do jogo e funcionalidades
-└── README.md           # Documentação completa
+### Variáveis de Ambiente
+```bash
+# server/.env
+MONGODB_URI=mongodb://localhost:27017/crypto-real
+PORT=5000
+NODE_ENV=development
 ```
 
-## 🎯 Próximas Melhorias
+### Parâmetros do Mercado
+```javascript
+// server/index.js
+const factorElasticidade = 0.001;        // Sensibilidade do preço
+const marketEvents = [                   // Eventos de mercado
+  { message: "Hacker rouba exchange!", impact: -0.20, probability: 0.05 },
+  { message: "Nova parceria anunciada!", impact: 0.15, probability: 0.08 },
+  // ... mais eventos
+];
+```
 
-- [ ] **Modo Multiplayer**: Competição em tempo real
-- [ ] **Gráficos Interativos**: Charts para análise técnica
-- [ ] **Sistema de Notificações Push**: Alertas avançados
-- [ ] **Modo Offline**: Funcionamento sem internet
-- [ ] **PWA**: Progressive Web App com instalação
-- [ ] **Mais Criptomoedas**: Expansão da lista disponível
-- [ ] **Sistema de Torneios**: Competições temporárias
-- [ ] **Integração com APIs**: Dados reais de mercado
+### Personalização de Estilo
+```css
+/* client/src/index.css */
+:root {
+  --crypto-green: #10B981;
+  --crypto-red: #EF4444;
+  --crypto-blue: #3B82F6;
+  --crypto-dark: #1F2937;
+}
+```
 
-## 🏆 Conquistas Disponíveis
+## 🚀 Próximos Passos
 
-1. **Primeiro Trade** - Execute sua primeira compra
-2. **Fazedor de Lucros** - Tenha um lucro de $1000
-3. **Diversificador** - Possua 5 criptomoedas diferentes
-4. **Milionário** - Alcance $1,000,000
-5. **Day Trader** - Execute 50 trades
-6. **HODLer** - Mantenha uma cripto por 30 dias
-7. **Mestre da Sequência** - 10 dias consecutivos de lucro
-8. **Tomador de Risco** - Use nível de risco máximo por 5 dias
-9. **Completador de Missões** - Complete 20 missões
-10. **Seguidor de Tendências** - Compre 3 criptos em tendência de alta
+### Funcionalidades Planejadas
+- [ ] **Sistema de Guildas**: Grupos de traders
+- [ ] **Moedas Alternativas**: Novas criptomoedas
+- [ ] **Sistema PvP**: Desafios entre jogadores
+- [ ] **Chat Global**: Comunicação em tempo real
+- [ ] **Conquistas**: Sistema de badges e recompensas
+- [ ] **Taxas de Transação**: Custos por trade
+- [ ] **Day/Night Cycle**: Variação por horário
+- [ ] **Boatos de Mercado**: Informações falsas
 
-## 🎮 Como Testar
+### Melhorias Técnicas
+- [ ] **Testes Automatizados**: Jest + Testing Library
+- [ ] **CI/CD**: GitHub Actions
+- [ ] **Docker**: Containerização
+- [ ] **Redis**: Cache em memória
+- [ ] **WebSocket Clustering**: Escalabilidade
+- [ ] **Rate Limiting**: Proteção contra spam
 
-1. **Clone o repositório**
-2. **Abra `index.html`** no navegador
-3. **Use as ferramentas de desenvolvedor** para simular 390x844
-4. **Interaja com todas as funcionalidades**:
-   - Complete missões diárias
-   - Desbloqueie conquistas
-   - Use o sistema de seguro
-   - Acompanhe o leaderboard
-   - Teste temas e configurações
+## 🛠️ Desenvolvimento
 
-## 📄 Licença
+### Estrutura do Projeto
+```
+crypto-empire/
+├── server/                 # Backend Node.js
+│   ├── models/            # Schemas MongoDB
+│   ├── routes/            # API REST
+│   ├── index.js           # Servidor principal
+│   └── package.json
+├── client/                 # Frontend React
+│   ├── src/
+│   │   ├── components/    # Componentes React
+│   │   ├── contexts/      # Context API
+│   │   ├── App.js         # App principal
+│   │   └── index.js       # Entry point
+│   └── package.json
+├── package.json            # Scripts principais
+└── README.md
+```
 
-Este projeto é de código aberto e está disponível sob a licença MIT.
+### Scripts Disponíveis
+```bash
+npm run dev          # Desenvolvimento (servidor + cliente)
+npm run server       # Apenas backend
+npm run client       # Apenas frontend
+npm run build        # Build de produção
+npm run install-all  # Instala todas as dependências
+```
+
+### Tecnologias Utilizadas
+- **Frontend**: React, TailwindCSS, Framer Motion, Recharts
+- **Backend**: Node.js, Express, Socket.io, Mongoose
+- **Banco**: MongoDB
+- **Dev Tools**: Nodemon, Concurrently
+
+## 🐛 Solução de Problemas
+
+### Erro de Conexão MongoDB
+```bash
+# Verificar se o MongoDB está rodando
+mongod --version
+# Iniciar MongoDB
+mongod
+```
+
+### Porta já em uso
+```bash
+# Verificar processos nas portas
+netstat -ano | findstr :5000
+netstat -ano | findstr :3000
+
+# Matar processo específico
+taskkill /PID <PID> /F
+```
+
+### Dependências não encontradas
+```bash
+# Limpar cache e reinstalar
+rm -rf node_modules package-lock.json
+npm install
+```
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+
+## 🤝 Contribuição
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📞 Suporte
+
+- **Issues**: Use o GitHub Issues para reportar bugs
+- **Discussions**: Use o GitHub Discussions para perguntas
+- **Email**: [seu-email@exemplo.com]
 
 ---
 
-**Desenvolvido com ❤️ para otimização mobile e funcionalidades avançadas**
+**Crypto Real Simulator** - Transformando o mercado de criptomoedas em um jogo emocionante! 🎯💰

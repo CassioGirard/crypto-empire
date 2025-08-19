@@ -1,0 +1,19 @@
+{
+  "name": "crypto-real-simulator",
+  "version": "1.0.0",
+  "description": "Simulador comunitário de mercado de criptomoeda fictícia $REAL",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install"
+  },
+  "keywords": ["crypto", "simulator", "game", "real-time"],
+  "author": "Crypto Empire",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

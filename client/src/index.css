@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-crypto-darker text-white font-sans;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-crypto-blue hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-success {
+    @apply bg-crypto-green hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-danger {
+    @apply bg-crypto-red hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .card {
+    @apply bg-crypto-dark border border-gray-700 rounded-xl p-6 shadow-lg;
+  }
+  
+  .input-field {
+    @apply bg-crypto-dark border border-gray-600 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-crypto-blue focus:border-transparent;
+  }
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-crypto-dark;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-crypto-gray rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
