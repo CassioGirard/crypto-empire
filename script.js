@@ -429,6 +429,9 @@ class CryptoGame {
             // Armazenar a variação percentual real para exibição
             crypto.lastChangePercent = change * 100;
             
+            // Debug: verificar se a variação está sendo calculada corretamente
+            console.log(`${crypto.symbol}: baseChange=${baseChange.toFixed(4)}, sentiment=${sentimentMultiplier}, risk=${riskMultiplier}, finalChange=${change.toFixed(4)}, percent=${crypto.lastChangePercent.toFixed(2)}%`);
+            
             if (crypto.price > oldPrice) {
                 crypto.trend = 'up';
             } else if (crypto.price < oldPrice) {
