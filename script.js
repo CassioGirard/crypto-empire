@@ -40,21 +40,21 @@ class CryptoGame {
         this.isProcessingNextDay = false; // Proteção contra múltiplos cliques
         
         this.cryptos = [
-            { name: 'Bitcoin', symbol: 'BTC', price: 45000, volatility: 0.15, marketCap: 850000000000, category: 'store-of-value', trend: 'up', lastUpdate: 0 },
-            { name: 'Ethereum', symbol: 'ETH', price: 3200, volatility: 0.18, marketCap: 380000000000, category: 'smart-contracts', trend: 'up', lastUpdate: 0 },
-            { name: 'Cardano', symbol: 'ADA', price: 1.20, volatility: 0.25, marketCap: 42000000000, category: 'smart-contracts', trend: 'down', lastUpdate: 0 },
-            { name: 'Solana', symbol: 'SOL', price: 95, volatility: 0.22, marketCap: 41000000000, category: 'smart-contracts', trend: 'up', lastUpdate: 0 },
-            { name: 'Polkadot', symbol: 'DOT', price: 18, volatility: 0.20, marketCap: 18000000000, category: 'interoperability', trend: 'neutral', lastUpdate: 0 },
-            { name: 'Chainlink', symbol: 'LINK', price: 25, volatility: 0.23, marketCap: 14000000000, category: 'oracles', trend: 'down', lastUpdate: 0 },
-            { name: 'Uniswap', symbol: 'UNI', price: 12, volatility: 0.21, marketCap: 7200000000, category: 'defi', trend: 'up', lastUpdate: 0 },
-            { name: 'Aave', symbol: 'AAVE', price: 280, volatility: 0.19, marketCap: 4000000000, category: 'defi', trend: 'neutral', lastUpdate: 0 },
-            { name: 'Polygon', symbol: 'MATIC', price: 0.85, volatility: 0.26, marketCap: 8000000000, category: 'scaling', trend: 'up', lastUpdate: 0 },
-            { name: 'Avalanche', symbol: 'AVAX', price: 35, volatility: 0.24, marketCap: 12000000000, category: 'smart-contracts', trend: 'down', lastUpdate: 0 },
-            { name: 'Dogecoin', symbol: 'DOGE', price: 0.08, volatility: 0.35, marketCap: 12000000000, category: 'meme', trend: 'neutral', lastUpdate: 0 },
-            { name: 'Shiba Inu', symbol: 'SHIB', price: 0.00002, volatility: 0.40, marketCap: 8000000000, category: 'meme', trend: 'neutral', lastUpdate: 0 },
-            { name: 'Litecoin', symbol: 'LTC', price: 120, volatility: 0.18, marketCap: 8000000000, category: 'store-of-value', trend: 'down', lastUpdate: 0 },
-            { name: 'Bitcoin Cash', symbol: 'BCH', price: 280, volatility: 0.25, marketCap: 5000000000, category: 'store-of-value', trend: 'neutral', lastUpdate: 0 },
-            { name: 'XRP', symbol: 'XRP', price: 0.75, volatility: 0.20, marketCap: 35000000000, category: 'payments', trend: 'up', lastUpdate: 0 }
+            { name: 'Bitcoin', symbol: 'BTC', price: 45000, volatility: 0.15, marketCap: 850000000000, category: 'store-of-value', trend: 'up', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Ethereum', symbol: 'ETH', price: 3200, volatility: 0.18, marketCap: 380000000000, category: 'smart-contracts', trend: 'up', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Cardano', symbol: 'ADA', price: 1.20, volatility: 0.25, marketCap: 42000000000, category: 'smart-contracts', trend: 'down', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Solana', symbol: 'SOL', price: 95, volatility: 0.22, marketCap: 41000000000, category: 'smart-contracts', trend: 'up', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Polkadot', symbol: 'DOT', price: 18, volatility: 0.20, marketCap: 18000000000, category: 'interoperability', trend: 'neutral', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Chainlink', symbol: 'LINK', price: 25, volatility: 0.23, marketCap: 14000000000, category: 'oracles', trend: 'down', lastUpdate: 0, lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Uniswap', symbol: 'UNI', price: 12, volatility: 0.21, marketCap: 7200000000, category: 'defi', trend: 'up', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Aave', symbol: 'AAVE', price: 280, volatility: 0.19, marketCap: 4000000000, category: 'defi', trend: 'neutral', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Polygon', symbol: 'MATIC', price: 0.85, volatility: 0.26, marketCap: 8000000000, category: 'scaling', trend: 'up', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Avalanche', symbol: 'AVAX', price: 35, volatility: 0.24, marketCap: 12000000000, category: 'smart-contracts', trend: 'down', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Dogecoin', symbol: 'DOGE', price: 0.08, volatility: 0.35, marketCap: 12000000000, category: 'meme', trend: 'neutral', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Shiba Inu', symbol: 'SHIB', price: 0.00002, volatility: 0.40, marketCap: 8000000000, category: 'meme', trend: 'neutral', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Litecoin', symbol: 'LTC', price: 120, volatility: 0.18, marketCap: 8000000000, category: 'store-of-value', trend: 'down', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'Bitcoin Cash', symbol: 'BCH', price: 280, volatility: 0.25, marketCap: 5000000000, category: 'store-of-value', trend: 'neutral', lastUpdate: 0, lastChangePercent: 0 },
+            { name: 'XRP', symbol: 'XRP', price: 0.75, volatility: 0.20, marketCap: 35000000000, category: 'payments', trend: 'up', lastUpdate: 0, lastChangePercent: 0 }
         ];
         
         this.initializeGame();
@@ -426,6 +426,9 @@ class CryptoGame {
             crypto.price *= (1 + change);
             crypto.price = Math.max(crypto.price, 0.01);
             
+            // Armazenar a variação percentual real para exibição
+            crypto.lastChangePercent = change * 100;
+            
             if (crypto.price > oldPrice) {
                 crypto.trend = 'up';
             } else if (crypto.price < oldPrice) {
@@ -496,7 +499,8 @@ class CryptoGame {
             const cryptoItem = document.createElement('div');
             cryptoItem.className = 'crypto-item';
             
-            const change = ((crypto.price - crypto.price * 0.95) / (crypto.price * 0.95)) * 100;
+            // Usar a variação percentual real que foi calculada quando o preço foi atualizado
+            const change = crypto.lastChangePercent || 0;
             const changeClass = change >= 0 ? 'positive' : 'negative';
             const changeSymbol = change >= 0 ? '+' : '';
             
