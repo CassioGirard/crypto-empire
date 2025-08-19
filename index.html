@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Empire - Simulador de Mercado</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>🚀 Crypto Empire</h1>
+            <div class="stats">
+                <div class="stat">
+                    <span class="label">Saldo:</span>
+                    <span class="value" id="balance">$10,000</span>
+                </div>
+                <div class="stat">
+                    <span class="label">Portfolio:</span>
+                    <span class="value" id="portfolio-value">$10,000</span>
+                </div>
+                <div class="stat">
+                    <span class="label">Dia:</span>
+                    <span class="value" id="day">1</span>
+                </div>
+                <div class="stat">
+                    <span class="label">Nível:</span>
+                    <span class="value" id="level">1</span>
+                </div>
+                <div class="stat">
+                    <span class="label">XP:</span>
+                    <span class="value" id="experience">0/100</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-main">
+            <div class="market-section">
+                <h2>📈 Mercado de Criptomoedas</h2>
+                <div class="market-controls">
+                    <button id="next-day" class="btn btn-primary">Próximo Dia</button>
+                    <button id="pause" class="btn btn-secondary">Pausar</button>
+                    <div class="risk-controls">
+                        <span class="risk-label">Risco:</span>
+                        <button id="risk-decrease" class="btn btn-small">-</button>
+                        <span id="risk-level" class="risk-value">1</span>
+                        <button id="risk-increase" class="btn btn-small">+</button>
+                    </div>
+                </div>
+                <div class="market-info">
+                    <span class="sentiment-label">Sentimento:</span>
+                    <span id="market-sentiment" class="sentiment-value">➡️ Neutral</span>
+                </div>
+                <div class="crypto-list" id="crypto-list">
+                    <!-- Lista de criptomoedas será gerada dinamicamente -->
+                </div>
+            </div>
+
+            <div class="portfolio-section">
+                <h2>💼 Meu Portfolio</h2>
+                <div class="portfolio-items" id="portfolio-items">
+                    <!-- Items do portfolio serão gerados dinamicamente -->
+                </div>
+            </div>
+
+            <div class="trading-section">
+                <h2>💰 Comprar/Vender</h2>
+                <div class="trading-form">
+                    <select id="crypto-select" class="form-select">
+                        <option value="">Selecione uma criptomoeda</option>
+                    </select>
+                    <input type="number" id="amount" class="form-input" placeholder="Quantidade" min="0" step="0.01">
+                    <div class="trading-buttons">
+                        <button id="buy-btn" class="btn btn-success">Comprar</button>
+                        <button id="sell-btn" class="btn btn-danger">Vender</button>
+                    </div>
+                    <div class="trading-options">
+                        <button id="add-favorites" class="btn btn-small">⭐ Favoritos</button>
+                        <button id="buy-insurance" class="btn btn-small">🛡️ Seguro</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="missions-section">
+                <h2>🎯 Missões Diárias</h2>
+                <div class="missions-container" id="missions-container">
+                    <!-- Missões serão geradas dinamicamente -->
+                </div>
+            </div>
+
+            <div class="leaderboard-section">
+                <h2>🏆 Ranking Global</h2>
+                <div class="leaderboard-container" id="leaderboard-container">
+                    <!-- Leaderboard será gerado dinamicamente -->
+                </div>
+            </div>
+
+            <div class="news-section">
+                <h2>📰 Notícias do Mercado</h2>
+                <div class="news-container" id="news-container">
+                    <!-- Notícias serão geradas dinamicamente -->
+                </div>
+            </div>
+
+            <div class="events-section">
+                <h2>⚡ Eventos Especiais</h2>
+                <div class="events-container" id="events-container">
+                    <!-- Eventos especiais serão gerados dinamicamente -->
+                </div>
+            </div>
+
+            <div class="achievements-section">
+                <h2>🏆 Conquistas</h2>
+                <div class="achievements-container" id="achievements-container">
+                    <!-- Conquistas serão geradas dinamicamente -->
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <h2>📊 Estatísticas Avançadas</h2>
+                <div class="advanced-stats" id="advanced-stats">
+                    <!-- Estatísticas avançadas serão geradas dinamicamente -->
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h2>⚙️ Configurações</h2>
+                <div class="settings-controls">
+                    <button id="toggle-sound" class="btn btn-small">🔊 Som</button>
+                    <button id="toggle-theme" class="btn btn-small">🌙 Tema</button>
+                    <button id="reset-game" class="btn btn-small btn-danger">🔄 Reset</button>
+                </div>
+                <div class="game-info">
+                    <p><strong>Sequência de Lucros:</strong> <span id="streak-display">0</span> dias</p>
+                    <p><strong>Sequência Máxima:</strong> <span id="max-streak-display">0</span> dias</p>
+                    <p><strong>Bônus Diário:</strong> <span id="daily-bonus-display">$0</span></p>
+                    <p><strong>Seguro:</strong> <span id="insurance-status">Inativo</span></p>
+                </div>
+            </div>
+        </main>
+
+        <div class="notifications" id="notifications"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
