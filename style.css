@@ -1,3 +1,4 @@
+/* Reset e configurações básicas */
 * {
     margin: 0;
     padding: 0;
@@ -7,104 +8,105 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
     color: #333;
+    line-height: 1.6;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
+/* Container principal */
 .game-container {
-    min-height: 100vh;
-    padding: 8px;
-    padding-top: 140px;
-    display: flex;
-    flex-direction: column;
     max-width: 390px;
     margin: 0 auto;
+    padding: 0;
+    background: transparent;
+    min-height: 100vh;
+    position: relative;
 }
 
+/* Header fixo */
 .game-header {
     position: fixed;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 374px;
-    z-index: 1000;
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 0 0 20px 20px;
-    padding: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    min-height: 120px;
-    max-height: 140px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.game-header h1 {
-    font-size: 1.4rem;
-    color: #667eea;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-bottom: 5px;
-    order: 1;
-}
-
-.stats {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    order: 2;
-}
-
-.stat {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    padding: 6px 8px;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 65px;
-    max-width: 70px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.stat .label {
-    font-size: 0.65rem;
-    opacity: 0.9;
-    margin-bottom: 2px;
-    line-height: 1;
-}
-
-.stat .value {
-    font-size: 0.75rem;
-    font-weight: bold;
-    line-height: 1;
-}
-
-.game-main {
-    flex: 1;
+    padding: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 5px;
+    min-height: 120px;
+    max-height: 140px;
 }
 
+.game-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: #667eea;
+    margin: 0;
+}
+
+/* Estatísticas */
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    font-size: 0.75rem;
+}
+
+.stat {
+    background: rgba(102, 126, 234, 0.1);
+    padding: 6px 8px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    min-width: 70px;
+    max-width: 100px;
+}
+
+.stat .label {
+    display: block;
+    font-weight: 600;
+    color: #667eea;
+    font-size: 0.65rem;
+}
+
+.stat .value {
+    display: block;
+    font-weight: 700;
+    color: #333;
+    font-size: 0.75rem;
+}
+
+/* Conteúdo principal */
+.game-main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 140px 10px 20px;
+}
+
+/* Seções principais */
 .market-section,
 .portfolio-section,
 .trading-section,
+.missions-section,
+.leaderboard-section,
 .news-section,
 .events-section,
 .achievements-section,
-.stats-section {
+.stats-section,
+.settings-section {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 12px;
     padding: 12px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -112,20 +114,53 @@ body {
     flex-direction: column;
 }
 
-.market-section {
-    margin-top: 15px;
+/* Títulos das seções */
+h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #667eea;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
-h2 {
-    color: #667eea;
+/* Controles de tempo */
+.time-controls {
+    display: flex;
+    gap: 8px;
     margin-bottom: 8px;
-    font-size: 0.9rem;
+    justify-content: center;
+}
+
+.speed-controls {
     display: flex;
     align-items: center;
     gap: 6px;
-    flex-shrink: 0;
+    margin-bottom: 8px;
+    justify-content: center;
 }
 
+.speed-label {
+    font-weight: 600;
+    color: #666;
+    font-size: 0.75rem;
+}
+
+.btn-active {
+    background: linear-gradient(135deg, #4caf50, #45a049) !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3) !important;
+}
+
+.time-info {
+    font-size: 0.7rem;
+    color: #666;
+    background: rgba(102, 126, 234, 0.1);
+    padding: 3px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+/* Melhorias nos controles existentes */
 .market-controls {
     display: flex;
     flex-direction: column;
@@ -142,60 +177,25 @@ h2 {
     margin-top: 5px;
 }
 
-.risk-label {
-    font-weight: 600;
-    color: #666;
-    font-size: 0.75rem;
-}
-
-.risk-value {
-    font-weight: bold;
-    color: #667eea;
-    min-width: 20px;
-    text-align: center;
-}
-
-.market-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    margin-bottom: 8px;
-    padding: 8px;
-    background: rgba(102, 126, 234, 0.1);
-    border-radius: 8px;
-    flex-shrink: 0;
-}
-
-.sentiment-label {
-    font-weight: 600;
-    color: #666;
-    font-size: 0.75rem;
-}
-
-.sentiment-value {
-    font-weight: bold;
-    color: #667eea;
-    font-size: 0.75rem;
-}
-
+/* Botões */
 .btn {
-    padding: 8px 12px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
     border: none;
+    padding: 10px 16px;
     border-radius: 8px;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.2px;
+    text-align: center;
     width: 100%;
+    min-height: 40px;
 }
 
 .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    filter: brightness(1.1);
 }
 
 .btn:active {
@@ -203,384 +203,340 @@ h2 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.btn-small {
-    padding: 4px 8px;
-    font-size: 0.7rem;
-    width: auto;
-}
-
 .btn-primary {
     background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
-    color: white;
+    background: linear-gradient(135deg, #6c757d, #495057);
 }
 
 .btn-success {
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-    color: white;
+    background: linear-gradient(135deg, #28a745, #20c997);
 }
 
 .btn-danger {
-    background: linear-gradient(135deg, #fa709a, #fee140);
-    color: white;
+    background: linear-gradient(135deg, #dc3545, #c82333);
 }
 
+.btn-small {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    min-height: 32px;
+}
+
+/* Formulários */
+.form-select,
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    background: white;
+    margin-bottom: 8px;
+}
+
+.form-select:focus,
+.form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Lista de criptomoedas */
 .crypto-list {
+    max-height: 300px;
+    overflow-y: auto;
+    gap: 8px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 5px;
-    max-height: 200px;
 }
 
 .crypto-item {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    background: rgba(102, 126, 234, 0.05);
+    padding: 10px;
     border-radius: 8px;
-    padding: 8px;
-    border-left: 3px solid #667eea;
-    transition: all 0.3s ease;
-}
-
-.crypto-item:hover {
-    transform: translateX(3px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.crypto-header {
+    border: 1px solid rgba(102, 126, 234, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 4px;
+}
+
+.crypto-info {
+    flex: 1;
 }
 
 .crypto-name {
-    font-weight: bold;
-    font-size: 0.75rem;
-    color: #667eea;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #333;
 }
 
 .crypto-price {
     font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.crypto-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.crypto-category {
-    font-size: 0.6rem;
     color: #666;
-    background: rgba(102, 126, 234, 0.1);
-    padding: 2px 4px;
-    border-radius: 4px;
-    text-transform: capitalize;
 }
 
 .crypto-change {
-    font-size: 0.65rem;
-    padding: 2px 4px;
-    border-radius: 4px;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 0.8rem;
 }
 
 .crypto-change.positive {
-    background: rgba(76, 175, 80, 0.2);
-    color: #4caf50;
+    color: #28a745;
 }
 
 .crypto-change.negative {
-    background: rgba(244, 67, 54, 0.2);
-    color: #f44336;
+    color: #dc3545;
 }
 
+/* Portfolio */
 .portfolio-items {
+    max-height: 200px;
+    overflow-y: auto;
+    gap: 8px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 5px;
-    max-height: 150px;
 }
 
 .portfolio-item {
-    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-    border-radius: 6px;
-    padding: 6px;
-    border-left: 2px solid #2196f3;
-}
-
-.portfolio-header {
+    background: rgba(102, 126, 234, 0.05);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 3px;
 }
 
-.portfolio-details {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.65rem;
-    color: #666;
-    margin-bottom: 2px;
-}
-
-.portfolio-extra {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.55rem;
-    color: #888;
-}
-
-.trading-form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: stretch;
-}
-
-.form-select, .form-input {
-    padding: 8px;
-    border: 2px solid #e0e0e0;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    transition: border-color 0.3s ease;
-    width: 100%;
-}
-
-.form-select:focus, .form-input:focus {
-    outline: none;
-    border-color: #667eea;
-}
-
+/* Trading */
 .trading-buttons {
     display: flex;
     gap: 8px;
+    margin-bottom: 8px;
 }
 
-.trading-buttons .btn {
-    flex: 1;
+.trading-options {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
 }
 
-/* Notícias */
-.news-container {
+/* Missões */
+.missions-container {
+    max-height: 200px;
+    overflow-y: auto;
+    gap: 8px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 5px;
-    max-height: 150px;
 }
 
-.news-item {
-    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+.mission-item {
+    background: rgba(102, 126, 234, 0.05);
+    padding: 10px;
     border-radius: 8px;
-    padding: 8px;
-    border-left: 3px solid #ff9800;
-    transition: all 0.3s ease;
+    border: 1px solid rgba(102, 126, 234, 0.1);
 }
 
-.news-item.bullish {
-    background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
-    border-left-color: #4caf50;
+.mission-progress {
+    background: rgba(102, 126, 234, 0.2);
+    height: 6px;
+    border-radius: 3px;
+    margin-top: 5px;
+    overflow: hidden;
 }
 
-.news-item.bearish {
-    background: linear-gradient(135deg, #ffebee, #ffcdd2);
-    border-left-color: #f44336;
+.mission-progress-bar {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    height: 100%;
+    transition: width 0.3s ease;
 }
 
-.news-day {
-    font-size: 0.65rem;
-    color: #666;
-    display: block;
-    margin-bottom: 3px;
+/* Leaderboard */
+.leaderboard-container {
+    max-height: 200px;
+    overflow-y: auto;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
 }
 
-.news-text {
-    font-weight: 500;
-    font-size: 0.75rem;
+.leaderboard-item {
+    background: rgba(102, 126, 234, 0.05);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Eventos Especiais */
+.leaderboard-rank {
+    font-weight: 700;
+    color: #667eea;
+    font-size: 0.9rem;
+}
+
+.leaderboard-name {
+    flex: 1;
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+.leaderboard-score {
+    font-weight: 700;
+    color: #28a745;
+}
+
+/* Notícias e eventos */
+.news-container,
 .events-container {
+    max-height: 200px;
+    overflow-y: auto;
+    gap: 8px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 5px;
-    max-height: 150px;
 }
 
+.news-item,
 .event-item {
-    background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+    background: rgba(102, 126, 234, 0.05);
+    padding: 10px;
     border-radius: 8px;
-    padding: 8px;
-    border-left: 3px solid #9c27b0;
+    border: 1px solid rgba(102, 126, 234, 0.1);
 }
 
-.event-day {
-    font-size: 0.65rem;
-    color: #666;
-    display: block;
-    margin-bottom: 3px;
+.news-title,
+.event-title {
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
 }
 
-.event-name {
-    font-weight: bold;
-    color: #9c27b0;
-    display: block;
-    margin-bottom: 3px;
-    font-size: 0.75rem;
-}
-
-.event-description {
-    font-size: 0.75rem;
+.news-content,
+.event-content {
+    font-size: 0.8rem;
     color: #666;
 }
 
 /* Conquistas */
 .achievements-container {
+    max-height: 200px;
+    overflow-y: auto;
+    gap: 8px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 5px;
-    max-height: 200px;
 }
 
 .achievement-item {
-    background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-    border-radius: 10px;
+    background: rgba(102, 126, 234, 0.05);
     padding: 10px;
-    border-left: 4px solid #ccc;
-    transition: all 0.3s ease;
-}
-
-.achievement-item.unlocked {
-    background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
-    border-left-color: #4caf50;
-}
-
-.achievement-item.locked {
-    opacity: 0.7;
-}
-
-.achievement-header {
+    border-radius: 8px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 6px;
+    gap: 10px;
+}
+
+.achievement-icon {
+    font-size: 1.5rem;
+}
+
+.achievement-info {
+    flex: 1;
 }
 
 .achievement-name {
-    font-weight: bold;
-    color: #333;
-    font-size: 0.75rem;
-}
-
-.achievement-reward {
-    background: #ffd700;
-    color: #333;
-    padding: 3px 6px;
-    border-radius: 6px;
-    font-size: 0.65rem;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 0.85rem;
 }
 
 .achievement-description {
-    font-size: 0.65rem;
-    color: #666;
-    margin-bottom: 6px;
-    display: block;
-}
-
-.achievement-status {
-    font-size: 0.65rem;
-    font-weight: bold;
-    color: #666;
-}
-
-/* Estatísticas Avançadas */
-.advanced-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 5px;
-    max-height: 200px;
-}
-
-.stat-item {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-}
-
-.stat-label {
-    display: block;
     font-size: 0.75rem;
     color: #666;
-    margin-bottom: 6px;
 }
 
-.stat-value {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #333;
+/* Estatísticas avançadas */
+.advanced-stats {
+    max-height: 200px;
+    overflow-y: auto;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
 }
 
-.stat-value.positive {
-    color: #4caf50;
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(102, 126, 234, 0.1);
 }
 
-.stat-value.negative {
-    color: #f44336;
+.stat-row:last-child {
+    border-bottom: none;
 }
 
+/* Configurações */
+.settings-controls {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.game-info {
+    background: rgba(102, 126, 234, 0.05);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.game-info p {
+    margin: 5px 0;
+    font-size: 0.8rem;
+}
+
+.game-info strong {
+    color: #667eea;
+}
+
+/* Notificações */
 .notifications {
     position: fixed;
-    top: 15px;
-    right: 15px;
-    z-index: 1000;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+    max-width: 300px;
 }
 
 .notification {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    border-radius: 12px;
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
     padding: 12px 16px;
-    margin-bottom: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    border-left: 4px solid #4caf50;
-    animation: slideIn 0.3s ease;
-    max-width: 280px;
-    font-size: 0.9rem;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid #667eea;
+    animation: slideInRight 0.3s ease;
+}
+
+.notification.success {
+    border-left-color: #28a745;
 }
 
 .notification.error {
-    border-left-color: #f44336;
+    border-left-color: #dc3545;
 }
 
 .notification.info {
-    border-left-color: #2196f3;
+    border-left-color: #17a2b8;
 }
 
-@keyframes slideIn {
+/* Animações */
+@keyframes slideInRight {
     from {
         transform: translateX(100%);
         opacity: 0;
@@ -591,1016 +547,80 @@ h2 {
     }
 }
 
-@keyframes headerSlideDown {
+@keyframes slideInLeft {
     from {
-        transform: translateX(-50%) translateY(-100%);
+        transform: translateX(-100%);
         opacity: 0;
     }
     to {
-        transform: translateX(-50%) translateY(0);
+        transform: translateX(0);
         opacity: 1;
     }
 }
 
-.game-header {
-    animation: headerSlideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+/* Indicadores visuais de velocidade */
+#speed-0\.5.btn-active::after { content: " 🐌"; }
+#speed-1.btn-active::after { content: " ⏱️"; }
+#speed-2.btn-active::after { content: " ⚡"; }
+#speed-5.btn-active::after { content: " 🚀"; }
+
+/* Contador regressivo */
+#next-day-countdown {
+    font-weight: bold;
+    color: #667eea;
+    animation: pulse 2s infinite;
 }
 
-/* Scrollbar personalizada */
-::-webkit-scrollbar {
-    width: 4px;
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
 }
 
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(102, 126, 234, 0.5);
-    border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(102, 126, 234, 0.7);
-}
-
-/* Media queries para outras resoluções */
+/* Responsividade para novos controles */
 @media (min-width: 391px) {
-    .game-container {
-        max-width: none;
-        padding: 15px;
-        padding-top: 160px;
-    }
-    
-    .game-header {
-        left: 0;
-        right: 0;
-        width: auto;
-        transform: none;
-        margin: 0 15px 15px 15px;
+    .time-controls,
+    .speed-controls {
         flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        min-height: 90px;
-        max-height: 120px;
-    }
-    
-    .game-header h1 {
-        order: 0;
-        margin-bottom: 0;
-        font-size: 2rem;
-    }
-    
-    .stats {
-        order: 0;
-        gap: 15px;
-        width: auto;
-    }
-    
-    .stat {
-        min-width: 100px;
-        padding: 8px 15px;
-        max-width: none;
-        flex: none;
-    }
-    
-    .stat .label {
-        font-size: 0.8rem;
-        margin-bottom: 3px;
-    }
-    
-    .stat .value {
-        font-size: 1rem;
-    }
-    
-    .game-main {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto auto;
-        gap: 15px;
-        margin-top: 15px;
-    }
-    
-    .market-section {
-        grid-column: 1;
-        grid-row: 1 / 3;
-        margin-top: 10px;
-    }
-    
-    .portfolio-section {
-        grid-column: 2;
-        grid-row: 1;
-    }
-    
-    .trading-section {
-        grid-column: 2;
-        grid-row: 2;
-    }
-    
-    .news-section {
-        grid-column: 1;
-        grid-row: 3;
-    }
-    
-    .events-section {
-        grid-column: 2;
-        grid-row: 3;
-    }
-    
-    .achievements-section {
-        grid-column: 1;
-        grid-row: 4;
-    }
-    
-    .stats-section {
-        grid-column: 2;
-        grid-row: 4;
-    }
-    
-    .market-controls {
-        flex-direction: row;
-        align-items: center;
-        gap: 6px;
-    }
-    
-    .risk-controls {
-        margin-left: auto;
-        margin-top: 0;
-    }
-    
-    .btn {
-        width: auto;
-        padding: 5px 10px;
-    }
-    
-    .trading-form {
-        grid-template-columns: 1fr 1fr auto;
-        flex-direction: row;
-        align-items: end;
-    }
-    
-    .trading-buttons {
-        justify-content: center;
-    }
-    
-    .trading-buttons .btn {
-        flex: none;
-    }
-    
-    .achievements-container,
-    .advanced-stats {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-    
-    .crypto-list,
-    .portfolio-items,
-    .news-container,
-    .events-container {
-        max-height: none;
-    }
-    
-    h2 {
-        font-size: 1rem;
-        margin-bottom: 6px;
-    }
-    
-    .market-section,
-    .portfolio-section,
-    .trading-section,
-    .news-section,
-    .events-section,
-    .achievements-section,
-    .stats-section {
-        padding: 15px;
-        border-radius: 15px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .game-main {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto auto;
-    }
-}
-
-/* Melhorias finais para mobile */
-@media (max-width: 390px) {
-    body {
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .game-container {
-        overflow-x: hidden;
-    }
-    
-    .game-header {
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 374px;
-        z-index: 1000;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-radius: 0 0 20px 20px;
-        padding: 12px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        min-height: 120px;
-        max-height: 140px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .game-header h1 {
-        font-size: 1.4rem;
-        color: #667eea;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        margin-bottom: 5px;
-        order: 1;
-        width: 100%;
-    }
-    
-    .stats {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-        order: 2;
-        align-items: center;
-    }
-    
-    .stat {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        padding: 6px 8px;
-        border-radius: 10px;
-        text-align: center;
-        min-width: 65px;
-        max-width: 70px;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    .stat .label {
-        font-size: 0.65rem;
-        opacity: 0.9;
-        margin-bottom: 2px;
-        line-height: 1;
-        font-weight: 500;
-    }
-    
-    .stat .value {
-        font-size: 0.75rem;
-        font-weight: bold;
-        line-height: 1;
-    }
-    
-    .game-main {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
         gap: 10px;
-        margin-top: 5px;
-        overflow-x: hidden;
-    }
-    
-    .market-section,
-    .portfolio-section,
-    .trading-section,
-    .news-section,
-    .events-section,
-    .achievements-section,
-    .stats-section {
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 12px;
-        padding: 12px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
-    
-    .market-section {
-        margin-top: 15px;
-    }
-    
-    h2 {
-        color: #667eea;
-        margin-bottom: 8px;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        flex-shrink: 0;
-        font-weight: 600;
     }
     
     .market-controls {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin-bottom: 10px;
-        align-items: stretch;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
     }
     
     .risk-controls {
-        display: flex;
-        align-items: center;
+        margin-top: 0;
+        margin-left: auto;
+    }
+}
+
+/* Melhorias para mobile */
+@media (max-width: 390px) {
+    .time-controls,
+    .speed-controls {
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 8px;
+    }
+    
+    .time-controls .btn {
+        flex: 1;
+        min-width: 80px;
+    }
+    
+    .speed-controls .btn {
+        flex: 1;
+        min-width: 60px;
+    }
+    
+    .time-info {
+        margin-left: 0;
         margin-top: 5px;
-    }
-    
-    .risk-label {
-        font-weight: 600;
-        color: #666;
-        font-size: 0.75rem;
-    }
-    
-    .risk-value {
-        font-weight: bold;
-        color: #667eea;
-        min-width: 20px;
+        display: block;
         text-align: center;
     }
-    
-    .market-info {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        margin-bottom: 8px;
-        padding: 8px;
-        background: rgba(102, 126, 234, 0.1);
-        border-radius: 8px;
-        flex-shrink: 0;
-    }
-    
-    .sentiment-label {
-        font-weight: 600;
-        color: #666;
-        font-size: 0.75rem;
-    }
-    
-    .sentiment-value {
-        font-weight: bold;
-        color: #667eea;
-        font-size: 0.75rem;
-    }
-    
-    .btn {
-        padding: 8px 12px;
-        border: none;
-        border-radius: 8px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.2px;
-        width: 100%;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-        filter: brightness(1.1);
-    }
-    
-    .btn:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
-    
-    .btn-small {
-        padding: 4px 8px;
-        font-size: 0.7rem;
-        width: auto;
-    }
-    
-    .btn-primary {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-    }
-    
-    .btn-secondary {
-        background: linear-gradient(135deg, #f093fb, #f5576c);
-        color: white;
-    }
-    
-    .btn-success {
-        background: linear-gradient(135deg, #4facfe, #00f2fe);
-        color: white;
-    }
-    
-    .btn-danger {
-        background: linear-gradient(135deg, #fa709a, #fee140);
-        color: white;
-    }
-    
-    .crypto-list {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        flex: 1;
-        overflow-y: auto;
-        padding-right: 5px;
-        max-height: 200px;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .crypto-item {
-        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-        border-radius: 8px;
-        padding: 8px;
-        border-left: 3px solid #667eea;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    }
-    
-    .crypto-item:hover {
-        transform: translateX(3px);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .crypto-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 4px;
-    }
-    
-    .crypto-name {
-        font-weight: bold;
-        font-size: 0.75rem;
-        color: #667eea;
-    }
-    
-    .crypto-price {
-        font-size: 0.8rem;
-        font-weight: bold;
-    }
-    
-    .crypto-details {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .crypto-category {
-        font-size: 0.6rem;
-        color: #666;
-        background: rgba(102, 126, 234, 0.1);
-        padding: 2px 4px;
-        border-radius: 4px;
-        text-transform: capitalize;
-    }
-    
-    .crypto-change {
-        font-size: 0.65rem;
-        padding: 2px 4px;
-        border-radius: 4px;
-        font-weight: bold;
-    }
-    
-    .crypto-change.positive {
-        background: rgba(76, 175, 80, 0.2);
-        color: #4caf50;
-    }
-    
-    .crypto-change.negative {
-        background: rgba(244, 67, 54, 0.2);
-        color: #f44336;
-    }
-    
-    .portfolio-items {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        flex: 1;
-        overflow-y: auto;
-        padding-right: 5px;
-        max-height: 150px;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .portfolio-item {
-        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-        border-radius: 6px;
-        padding: 6px;
-        border-left: 2px solid #2196f3;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-    }
-    
-    .portfolio-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 3px;
-    }
-    
-    .portfolio-details {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.65rem;
-        color: #666;
-        margin-bottom: 2px;
-    }
-    
-    .portfolio-extra {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.55rem;
-        color: #888;
-    }
-    
-    .trading-form {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        align-items: stretch;
-    }
-    
-    .form-select, .form-input {
-        padding: 8px;
-        border: 2px solid #e0e0e0;
-        border-radius: 6px;
-        font-size: 0.8rem;
-        transition: border-color 0.3s ease;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    
-    .form-select:focus, .form-input:focus {
-        outline: none;
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
-    
-    .trading-buttons {
-        display: flex;
-        gap: 8px;
-    }
-    
-    .trading-buttons .btn {
-        flex: 1;
-    }
-    
-    /* Notícias */
-    .news-container {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        flex: 1;
-        overflow-y: auto;
-        padding-right: 5px;
-        max-height: 150px;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .news-item {
-        background: linear-gradient(135deg, #fff3e0, #ffe0b2);
-        border-radius: 8px;
-        padding: 8px;
-        border-left: 3px solid #ff9800;
-        transition: all 0.3s ease;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-    }
-    
-    .news-item.bullish {
-        background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
-        border-left-color: #4caf50;
-    }
-    
-    .news-item.bearish {
-        background: linear-gradient(135deg, #ffebee, #ffcdd2);
-        border-left-color: #f44336;
-    }
-    
-    .news-day {
-        font-size: 0.65rem;
-        color: #666;
-        display: block;
-        margin-bottom: 3px;
-    }
-    
-    .news-text {
-        font-weight: 500;
-        font-size: 0.75rem;
-    }
-    
-    /* Eventos Especiais */
-    .events-container {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        flex: 1;
-        overflow-y: auto;
-        padding-right: 5px;
-        max-height: 150px;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .event-item {
-        background: linear-gradient(135deg, #f3e5f5, #e1bee7);
-        border-radius: 8px;
-        padding: 8px;
-        border-left: 3px solid #9c27b0;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-    }
-    
-    .event-day {
-        font-size: 0.65rem;
-        color: #666;
-        display: block;
-        margin-bottom: 3px;
-    }
-    
-    .event-name {
-        font-weight: bold;
-        color: #9c27b0;
-        display: block;
-        margin-bottom: 3px;
-        font-size: 0.75rem;
-    }
-    
-    .event-description {
-        font-size: 0.75rem;
-        color: #666;
-    }
-    
-    /* Conquistas */
-    .achievements-container {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        flex: 1;
-        overflow-y: auto;
-        padding-right: 5px;
-        max-height: 200px;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .achievement-item {
-        background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-        border-radius: 10px;
-        padding: 10px;
-        border-left: 4px solid #ccc;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    }
-    
-    .achievement-item.unlocked {
-        background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
-        border-left-color: #4caf50;
-    }
-    
-    .achievement-item.locked {
-        opacity: 0.7;
-    }
-    
-    .achievement-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 6px;
-    }
-    
-    .achievement-name {
-        font-weight: bold;
-        color: #333;
-        font-size: 0.75rem;
-    }
-    
-    .achievement-reward {
-        background: #ffd700;
-        color: #333;
-        padding: 3px 6px;
-        border-radius: 6px;
-        font-size: 0.65rem;
-        font-weight: bold;
-    }
-    
-    .achievement-description {
-        font-size: 0.65rem;
-        color: #666;
-        margin-bottom: 6px;
-        display: block;
-    }
-    
-    .achievement-status {
-        font-size: 0.65rem;
-        font-weight: bold;
-        color: #666;
-    }
-    
-    /* Estatísticas Avançadas */
-    .advanced-stats {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        flex: 1;
-        overflow-y: auto;
-        padding-right: 5px;
-        max-height: 200px;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .stat-item {
-        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-        border-radius: 8px;
-        padding: 10px;
-        text-align: center;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    }
-    
-    .stat-label {
-        display: block;
-        font-size: 0.75rem;
-        color: #666;
-        margin-bottom: 6px;
-    }
-    
-    .stat-value {
-        font-size: 0.9rem;
-        font-weight: bold;
-        color: #333;
-    }
-    
-    .stat-value.positive {
-        color: #4caf50;
-    }
-    
-    .stat-value.negative {
-        color: #f44336;
-    }
-    
-    .notifications {
-        position: fixed;
-        top: 15px;
-        right: 15px;
-        z-index: 1000;
-    }
-    
-    .notification {
-        padding: 10px 12px;
-        margin-bottom: 6px;
-        max-width: 250px;
-        font-size: 0.8rem;
-    }
-    
-    /* Scrollbar personalizada para mobile */
-    ::-webkit-scrollbar {
-        width: 4px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.05);
-        border-radius: 2px;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: rgba(102, 126, 234, 0.3);
-        border-radius: 2px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: rgba(102, 126, 234, 0.5);
-    }
-
-/* Novas seções */
-.missions-section,
-.leaderboard-section,
-.settings-section {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-}
-
-.trading-options {
-    display: flex;
-    gap: 8px;
-    margin-top: 8px;
-    justify-content: center;
-}
-
-.trading-options .btn {
-    flex: 1;
-    font-size: 0.7rem;
-    padding: 6px 8px;
-}
-
-/* Missões */
-.missions-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 5px;
-    max-height: 200px;
-    -webkit-overflow-scrolling: touch;
-}
-
-.mission-item {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border-radius: 8px;
-    padding: 10px;
-    border-left: 3px solid #6c757d;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.mission-item.completed {
-    background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
-    border-left-color: #4caf50;
-}
-
-.mission-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-}
-
-.mission-name {
-    font-weight: bold;
-    color: #333;
-    font-size: 0.75rem;
-}
-
-.mission-reward {
-    background: #ffd700;
-    color: #333;
-    padding: 3px 6px;
-    border-radius: 6px;
-    font-size: 0.65rem;
-    font-weight: bold;
-}
-
-.mission-description {
-    font-size: 0.7rem;
-    color: #666;
-    margin-bottom: 8px;
-    display: block;
-}
-
-.mission-progress {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
-}
-
-.progress-bar {
-    flex: 1;
-    height: 8px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(135deg, #4caf50, #45a049);
-    transition: width 0.3s ease;
-}
-
-.progress-text {
-    font-size: 0.65rem;
-    color: #666;
-    font-weight: bold;
-    min-width: 40px;
-    text-align: right;
-}
-
-.mission-status {
-    font-size: 0.65rem;
-    font-weight: bold;
-    color: #666;
-    text-align: center;
-    display: block;
-}
-
-/* Leaderboard */
-.leaderboard-container {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 5px;
-    max-height: 200px;
-    -webkit-overflow-scrolling: touch;
-}
-
-.leaderboard-item {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border-radius: 8px;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.leaderboard-item.current-player {
-    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-    border-left: 3px solid #2196f3;
-}
-
-.player-rank {
-    font-size: 1.2rem;
-    min-width: 30px;
-    text-align: center;
-}
-
-.player-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.player-name {
-    font-weight: bold;
-    font-size: 0.75rem;
-    color: #333;
-}
-
-.player-level {
-    font-size: 0.65rem;
-    color: #666;
-}
-
-.player-stats {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
-}
-
-.player-balance {
-    font-weight: bold;
-    font-size: 0.75rem;
-    color: #333;
-}
-
-.player-profit {
-    font-size: 0.65rem;
-    color: #666;
-}
-
-/* Configurações */
-.settings-controls {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-    justify-content: center;
-}
-
-.settings-controls .btn {
-    flex: 1;
-    font-size: 0.7rem;
-    padding: 8px;
-}
-
-.game-info {
-    background: rgba(102, 126, 234, 0.1);
-    border-radius: 8px;
-    padding: 10px;
-    margin-top: 8px;
-}
-
-.game-info p {
-    margin: 4px 0;
-    font-size: 0.75rem;
-    color: #666;
-}
-
-.game-info strong {
-    color: #333;
 }
 
 /* Tema escuro */
@@ -1620,135 +640,34 @@ body.dark .events-section,
 body.dark .achievements-section,
 body.dark .stats-section,
 body.dark .settings-section {
-    background: rgba(30, 30, 30, 0.95);
+    background: rgba(30, 30, 50, 0.95);
     color: #e0e0e0;
 }
 
-body.dark h2 {
-    color: #64b5f6;
-}
-
 body.dark .stat {
-    background: linear-gradient(135deg, #1976d2, #1565c0);
+    background: rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.3);
 }
 
-body.dark .btn-primary {
-    background: linear-gradient(135deg, #1976d2, #1565c0);
+body.dark .crypto-item,
+body.dark .portfolio-item,
+body.dark .mission-item,
+body.dark .leaderboard-item,
+body.dark .news-item,
+body.dark .event-item,
+body.dark .achievement-item {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: rgba(102, 126, 234, 0.2);
 }
 
-body.dark .btn-secondary {
-    background: linear-gradient(135deg, #c2185b, #ad1457);
+body.dark .form-select,
+body.dark .form-input {
+    background: #2a2a3e;
+    border-color: rgba(102, 126, 234, 0.3);
+    color: #e0e0e0;
 }
 
-body.dark .btn-success {
-    background: linear-gradient(135deg, #388e3c, #2e7d32);
-}
-
-body.dark .btn-danger {
-    background: linear-gradient(135deg, #d32f2f, #c62828);
-}
-
-/* Animações para novas funcionalidades */
-.mission-item {
-    animation: slideInLeft 0.3s ease;
-}
-
-.leaderboard-item {
-    animation: slideInRight 0.3s ease;
-}
-
-@keyframes slideInLeft {
-    from {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-/* Responsividade para novas seções */
-@media (min-width: 391px) {
-    .missions-section,
-    .leaderboard-section,
-    .settings-section {
-        padding: 15px;
-        border-radius: 15px;
-    }
-    
-    .missions-container,
-    .leaderboard-container {
-        max-height: none;
-    }
-    
-    .settings-controls {
-        flex-direction: row;
-        gap: 10px;
-    }
-    
-    .trading-options {
-        flex-direction: row;
-        gap: 10px;
-    }
-}
-
-/* Melhorias finais para mobile */
-@media (max-width: 390px) {
-    .missions-container,
-    .leaderboard-container {
-        max-height: 180px;
-    }
-    
-    .mission-item {
-        padding: 8px;
-    }
-    
-    .mission-name {
-        font-size: 0.7rem;
-    }
-    
-    .mission-description {
-        font-size: 0.65rem;
-    }
-    
-    .leaderboard-item {
-        padding: 6px;
-    }
-    
-    .player-name {
-        font-size: 0.7rem;
-    }
-    
-    .player-level {
-        font-size: 0.6rem;
-    }
-    
-    .player-balance {
-        font-size: 0.7rem;
-    }
-    
-    .player-profit {
-        font-size: 0.6rem;
-    }
-    
-    .settings-controls {
-        flex-direction: column;
-        gap: 6px;
-    }
-    
-    .game-info p {
-        font-size: 0.7rem;
-    }
+body.dark .notification {
+    background: rgba(30, 30, 50, 0.95);
+    color: #e0e0e0;
 }

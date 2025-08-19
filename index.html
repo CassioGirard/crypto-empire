@@ -38,8 +38,18 @@
             <div class="market-section">
                 <h2>📈 Mercado de Criptomoedas</h2>
                 <div class="market-controls">
-                    <button id="next-day" class="btn btn-primary">Próximo Dia</button>
-                    <button id="pause" class="btn btn-secondary">Pausar</button>
+                    <div class="time-controls">
+                        <button id="next-day" class="btn btn-primary">⏭️ Próximo Dia</button>
+                        <button id="pause" class="btn btn-secondary">⏸️ Pausar</button>
+                        <button id="auto-advance" class="btn btn-success">🔄 Auto</button>
+                    </div>
+                    <div class="speed-controls">
+                        <span class="speed-label">Velocidade:</span>
+                        <button id="speed-0.5" class="btn btn-small">0.5x</button>
+                        <button id="speed-1" class="btn btn-small btn-active">1x</button>
+                        <button id="speed-2" class="btn btn-small">2x</button>
+                        <button id="speed-5" class="btn btn-small">5x</button>
+                    </div>
                     <div class="risk-controls">
                         <span class="risk-label">Risco:</span>
                         <button id="risk-decrease" class="btn btn-small">-</button>
@@ -50,6 +60,7 @@
                 <div class="market-info">
                     <span class="sentiment-label">Sentimento:</span>
                     <span id="market-sentiment" class="sentiment-value">➡️ Neutral</span>
+                    <span class="time-info" id="time-info">⏱️ 30s/dia</span>
                 </div>
                 <div class="crypto-list" id="crypto-list">
                     <!-- Lista de criptomoedas será gerada dinamicamente -->
@@ -135,6 +146,8 @@
                     <p><strong>Sequência Máxima:</strong> <span id="max-streak-display">0</span> dias</p>
                     <p><strong>Bônus Diário:</strong> <span id="daily-bonus-display">$0</span></p>
                     <p><strong>Seguro:</strong> <span id="insurance-status">Inativo</span></p>
+                    <p><strong>Velocidade do Tempo:</strong> <span id="time-speed-display">1x</span></p>
+                    <p><strong>Próximo Dia em:</strong> <span id="next-day-countdown">30s</span></p>
                 </div>
             </div>
         </main>
