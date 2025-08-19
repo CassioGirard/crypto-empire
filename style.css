@@ -41,8 +41,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    min-height: 140px;
-    max-height: 160px;
+    min-height: 160px;
+    max-height: 180px;
     overflow: visible;
 }
 
@@ -60,9 +60,10 @@ body {
     flex-direction: row;
     gap: 8px;
     font-size: 0.75rem;
-    max-height: 80px;
+    max-height: 90px;
     overflow: visible;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .stat {
@@ -80,6 +81,7 @@ body {
     flex-direction: column;
     justify-content: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 }
 
 .stat .label {
@@ -101,9 +103,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 180px 10px 20px; /* Aumentei de 160px para 180px */
+    padding: 200px 10px 20px;
     position: relative;
-    z-index: 1; /* Garantir que fique abaixo do header */
+    z-index: 1;
 }
 
 /* Seções principais */
