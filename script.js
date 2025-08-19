@@ -37,6 +37,7 @@ class CryptoGame {
         this.autoAdvance = true;
         this.dayInterval = 30000;
         this.lastDayAdvance = Date.now();
+        this.isProcessingNextDay = false; // Proteção contra múltiplos cliques
         
         this.cryptos = [
             { name: 'Bitcoin', symbol: 'BTC', price: 45000, volatility: 0.15, marketCap: 850000000000, category: 'store-of-value', trend: 'up', lastUpdate: 0 },
@@ -81,29 +82,199 @@ class CryptoGame {
     }
 
     setupEventListeners() {
-        document.getElementById('next-day').addEventListener('click', () => this.nextDay());
-        document.getElementById('pause').addEventListener('click', () => this.togglePause());
-        document.getElementById('auto-advance').addEventListener('click', () => this.toggleAutoAdvance());
-        document.getElementById('buy-btn').addEventListener('click', () => this.buy());
-        document.getElementById('sell-btn').addEventListener('click', () => this.sell());
-        document.getElementById('risk-increase').addEventListener('click', () => this.changeRisk(1));
-        document.getElementById('risk-decrease').addEventListener('click', () => this.changeRisk(-1));
+        console.log('🔧 Configurando event listeners...');
+        
+        // Botão próximo dia com proteção
+        const nextDayBtn = document.getElementById('next-day');
+        if (nextDayBtn) {
+            console.log('✅ Botão próximo dia encontrado');
+            nextDayBtn.addEventListener('click', (e) => {
+                console.log('🖱️ Botão próximo dia clicado');
+                e.preventDefault();
+                e.stopPropagation();
+                this.nextDay();
+            });
+        } else {
+            console.log('❌ Botão próximo dia NÃO encontrado');
+        }
+        
+        // Botão pause
+        const pauseBtn = document.getElementById('pause');
+        if (pauseBtn) {
+            console.log('✅ Botão pause encontrado');
+            pauseBtn.addEventListener('click', (e) => {
+                console.log('🖱️ Botão pause clicado');
+                e.preventDefault();
+                e.stopPropagation();
+                this.togglePause();
+            });
+        } else {
+            console.log('❌ Botão pause NÃO encontrado');
+        }
+        
+        // Botão auto advance
+        const autoAdvanceBtn = document.getElementById('auto-advance');
+        if (autoAdvanceBtn) {
+            console.log('✅ Botão auto advance encontrado');
+            autoAdvanceBtn.addEventListener('click', (e) => {
+                console.log('🖱️ Botão auto advance clicado');
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggleAutoAdvance();
+            });
+        } else {
+            console.log('❌ Botão auto advance NÃO encontrado');
+        }
+        
+        // Botões de trading
+        const buyBtn = document.getElementById('buy-btn');
+        if (buyBtn) {
+            console.log('✅ Botão comprar encontrado');
+            buyBtn.addEventListener('click', (e) => {
+                console.log('🖱️ Botão comprar clicado');
+                e.preventDefault();
+                e.stopPropagation();
+                this.buy();
+            });
+        } else {
+            console.log('❌ Botão comprar NÃO encontrado');
+        }
+        
+        const sellBtn = document.getElementById('sell-btn');
+        if (sellBtn) {
+            console.log('✅ Botão vender encontrado');
+            sellBtn.addEventListener('click', (e) => {
+                console.log('🖱️ Botão vender clicado');
+                e.preventDefault();
+                e.stopPropagation();
+                this.sell();
+            });
+        } else {
+            console.log('❌ Botão vender NÃO encontrado');
+        }
+        
+        // Controles de risco
+        const riskIncreaseBtn = document.getElementById('risk-increase');
+        if (riskIncreaseBtn) {
+            console.log('✅ Botão aumentar risco encontrado');
+            riskIncreaseBtn.addEventListener('click', (e) => {
+                console.log('🖱️ Botão aumentar risco clicado');
+                e.preventDefault();
+                e.stopPropagation();
+                this.changeRisk(1);
+            });
+        } else {
+            console.log('❌ Botão aumentar risco NÃO encontrado');
+        }
+        
+        const riskDecreaseBtn = document.getElementById('risk-decrease');
+        if (riskDecreaseBtn) {
+            console.log('✅ Botão diminuir risco encontrado');
+            riskDecreaseBtn.addEventListener('click', (e) => {
+                console.log('🖱️ Botão diminuir risco clicado');
+                e.preventDefault();
+                e.stopPropagation();
+                this.changeRisk(-1);
+            });
+        } else {
+            console.log('❌ Botão diminuir risco NÃO encontrado');
+        }
         
         // Controles de velocidade
-        document.getElementById('speed-0.5').addEventListener('click', () => this.setTimeSpeed(0.5));
-        document.getElementById('speed-1').addEventListener('click', () => this.setTimeSpeed(1));
-        document.getElementById('speed-2').addEventListener('click', () => this.setTimeSpeed(2));
-        document.getElementById('speed-5').addEventListener('click', () => this.setTimeSpeed(5));
+        const speed05Btn = document.getElementById('speed-0.5');
+        if (speed05Btn) {
+            console.log('✅ Botão velocidade 0.5x encontrado');
+            speed05Btn.addEventListener('click', (e) => {
+                console.log('🖱️ Botão velocidade 0.5x clicado');
+                e.preventDefault();
+                e.stopPropagation();
+                this.setTimeSpeed(0.5);
+            });
+        } else {
+            console.log('❌ Botão velocidade 0.5x NÃO encontrado');
+        }
+        
+        const speed1Btn = document.getElementById('speed-1');
+        if (speed1Btn) {
+            console.log('✅ Botão velocidade 1x encontrado');
+            speed1Btn.addEventListener('click', (e) => {
+                console.log('🖱️ Botão velocidade 1x clicado');
+                e.preventDefault();
+                e.stopPropagation();
+                this.setTimeSpeed(1);
+            });
+        } else {
+            console.log('❌ Botão velocidade 1x NÃO encontrado');
+        }
+        
+        const speed2Btn = document.getElementById('speed-2');
+        if (speed2Btn) {
+            console.log('✅ Botão velocidade 2x encontrado');
+            speed2Btn.addEventListener('click', (e) => {
+                console.log('🖱️ Botão velocidade 2x clicado');
+                e.preventDefault();
+                e.stopPropagation();
+                this.setTimeSpeed(2);
+            });
+        } else {
+            console.log('❌ Botão velocidade 2x NÃO encontrado');
+        }
+        
+        const speed5Btn = document.getElementById('speed-5');
+        if (speed5Btn) {
+            console.log('✅ Botão velocidade 5x encontrado');
+            speed5Btn.addEventListener('click', (e) => {
+                console.log('🖱️ Botão velocidade 5x clicado');
+                e.preventDefault();
+                e.stopPropagation();
+                this.setTimeSpeed(5);
+            });
+        } else {
+            console.log('❌ Botão velocidade 5x NÃO encontrado');
+        }
+        
+        console.log('🔧 Event listeners configurados!');
         
         // Novos event listeners
         this.setupNewEventListeners();
     }
 
     setupNewEventListeners() {
-        document.getElementById('buy-insurance').addEventListener('click', () => this.buyInsurance());
-        document.getElementById('toggle-sound').addEventListener('click', () => this.toggleSound());
-        document.getElementById('toggle-theme').addEventListener('click', () => this.toggleTheme());
-        document.getElementById('add-favorites').addEventListener('click', () => this.toggleFavorites());
+        const buyInsuranceBtn = document.getElementById('buy-insurance');
+        if (buyInsuranceBtn) {
+            buyInsuranceBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.buyInsurance();
+            });
+        }
+        
+        const toggleSoundBtn = document.getElementById('toggle-sound');
+        if (toggleSoundBtn) {
+            toggleSoundBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggleSound();
+            });
+        }
+        
+        const toggleThemeBtn = document.getElementById('toggle-theme');
+        if (toggleThemeBtn) {
+            toggleThemeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggleTheme();
+            });
+        }
+        
+        const addFavoritesBtn = document.getElementById('add-favorites');
+        if (addFavoritesBtn) {
+            addFavoritesBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggleFavorites();
+            });
+        }
     }
 
     toggleAutoAdvance() {
@@ -206,12 +377,26 @@ class CryptoGame {
     }
 
     nextDay() {
-        if (this.isPaused) return;
+        console.log('🕐 Função nextDay chamada');
+        
+        // Proteção contra múltiplos cliques
+        if (this.isProcessingNextDay) {
+            console.log('⚠️ nextDay já está sendo processado, ignorando clique');
+            return;
+        }
+        
+        console.log('✅ Iniciando processamento do próximo dia');
+        this.isProcessingNextDay = true;
+        
+        // Reset do sistema automático quando usar botão manual
+        this.lastDayAdvance = Date.now();
+        console.log('🔄 Reset do sistema automático');
         
         this.day++;
-        this.lastDayAdvance = Date.now();
+        console.log(`📅 Dia alterado para: ${this.day}`);
         
         this.updateMarketSentiment();
+        console.log('📊 Sentimento do mercado atualizado');
         
         this.cryptos.forEach(crypto => {
             const baseChange = (Math.random() - 0.5) * 2 * crypto.volatility;
@@ -234,6 +419,8 @@ class CryptoGame {
             crypto.lastUpdate = this.day;
         });
         
+        console.log('💰 Preços das criptomoedas atualizados');
+        
         this.updatePortfolio();
         this.checkAchievements();
         this.checkMissions();
@@ -245,7 +432,14 @@ class CryptoGame {
         this.generateNews();
         this.checkSpecialEvents();
         
-        this.showNotification(`Dia ${this.day} - Preços atualizados!`, 'info');
+        this.showNotification(`Dia ${this.day} - Preços atualizados!`, 'success');
+        console.log('✅ Próximo dia processado com sucesso');
+        
+        // Liberar o processamento após um pequeno delay
+        setTimeout(() => {
+            this.isProcessingNextDay = false;
+            console.log('🔓 Processamento liberado para próximo clique');
+        }, 500);
     }
 
     updateUI() {
